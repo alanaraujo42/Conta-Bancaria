@@ -1,3 +1,3 @@
 print('Olá Mundo')
-print(f'Um mais um é igual a 2')
+print('Um mais um é igual a 2')
 print('Teste Ci segunda vez')
