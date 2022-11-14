@@ -10,4 +10,3 @@ def soma(n, n2):
 
 print(soma(1, 1))
 print('Olá Mundo')
-print('Um mais um é igual a 2')
