@@ -22,6 +22,12 @@ jobs:
         run: pipenv sync
       - name: Install flake8
         run: pipenv install flake8
+      - name: Install Codecov
+        run: curl -Os https://uploader.codecov.io/latest/linux/codecov chmod +x codecov ./codecov
       - name: run flake8
         run: pipenv run flake8
+      - name: Run Pytest e Coverage
+        run: pytest --cov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
       
