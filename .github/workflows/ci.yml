@@ -19,15 +19,15 @@ jobs:
       - name: Install Pipenv
         run: pip install pipenv
       - name: Pipenv install dependencias
-        run: pipenv sync
+        run: pipenv sync -d
       - name: Install flake8
         run: pipenv install flake8
       - name: Install Codecov
         run: pipenv install codecov
-      - name: run flake8
+      - name: Run flake8
         run: pipenv run flake8
       - name: Run Pytest e Coverage
-        run: pytest --cov
+        run: pytest --cov=relatorio
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
       
