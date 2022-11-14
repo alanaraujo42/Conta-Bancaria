@@ -22,6 +22,8 @@ jobs:
         run: pipenv sync
       - name: Install flake8
         run: pipenv install flake8
+      - name: Dependências
+        run: pipenv graph
       - name: Install Codecov
         run: pipenv install codecov
       - name: run flake8
