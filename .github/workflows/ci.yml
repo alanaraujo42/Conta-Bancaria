@@ -1,4 +1,4 @@
-name: verificação-do-codigo
+name: ci
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ jobs:
       - name: Run flake8
         run: pipenv run flake8
       - name: Run Pytest e Coverage
-        run: pytest --cov=relatorio
+        run: pytest --cov=.
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
       
