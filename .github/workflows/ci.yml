@@ -23,5 +23,5 @@ jobs:
       - name: Install flake8
         run: pipenv install flake8
       - name: run flake8
-        run: flake8
+        run: pipenv run flake8
       
