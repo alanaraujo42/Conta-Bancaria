@@ -30,10 +30,10 @@ jobs:
         run: pipenv graph
       - name: Install Codecov
         run: pipenv install codecov
-      - name: run flake8
+      - name: Run flake8
         run: pipenv run flake8
       - name: Run Pytest e Coverage
-        run: pipenv run pytest --cov
+        run: pipenv pytest --cov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
       
