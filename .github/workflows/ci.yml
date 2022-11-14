@@ -19,7 +19,7 @@ jobs:
       - name: Install Pipenv
         run: pip install pipenv
       - name: Pipenv install dependencias
-        run: pipenv install Pipefile
+        run: pipenv sync -d
       - name: Install flake8
         run: pipenv install flake8
       - name: Dependências
