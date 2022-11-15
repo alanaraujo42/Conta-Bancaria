@@ -4,7 +4,7 @@ from desenvolvimento.conta_corrente import ContaCorrente
 
 @pytest.fixture
 def conta():
-    return ContaCorrente('Alan Araújo Santos', '11122233344', 20, '1234')
+    return ContaCorrente('Alan Araújo Santos', '11122233344', '1234')
 
 
 def test_cadastro_nome(conta):
@@ -13,10 +13,6 @@ def test_cadastro_nome(conta):
 
 def test_cadastro_cpf(conta):
     assert conta.cpf.isnumeric() and len(conta.cpf) == 11
-
-
-def test_cadastr_idade(conta):
-    assert isinstance(conta.idade, int) and conta.idade >= 18
 
 
 def test_cadastrar_senha(conta):
