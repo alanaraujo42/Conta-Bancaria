@@ -16,7 +16,7 @@ def cadastro_nome():
             else:
                 x = False
                 break
-        if x == True:
+        if x:
             return nome
         else:
             print('ERRO: Digite somente palavras!')
