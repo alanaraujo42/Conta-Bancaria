@@ -19,8 +19,9 @@ class ContaCorrente:
 
     def sacar_dinheiro(self, valor):
         """"
-        Função que vai verificar o saldo da conta e realizar saque, se valor menor ou igual 
-        ao saldo da e retornar True, caso contrátrio, False.
+        Função que vai verificar o saldo da conta e realizar saque, 
+        se valor menor ou igual ao saldo da e retornar True, caso 
+        contrátrio, False.
         """
         if ContaCorrente.verificar_saldo(valor):
             self.saldo -= valor
