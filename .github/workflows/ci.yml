@@ -27,7 +27,10 @@ jobs:
       - name: Run flake8
         run: pipenv run flake8
       - name: Run Pytest e Coverage
-        run: pipenv run pytest --cov=.
-      - name: Upload coverage to Codecov
-        run: pipenv run codecov
+        run: |
+          pipenv run pytest --cov=.
+          - uses: codecov/codecov-action@v
+            with:
+              token: ${{ secrets.CODECOV_TOKEN }}
+    
       
