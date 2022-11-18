@@ -1,4 +1,6 @@
-import path
+import sys
+sys.path.append('/home/runner/work/ferramenta-de-desenvolvimento')
+
 from desenvolvimento.conta_corrente import ContaCorrente
 import pytest
 
