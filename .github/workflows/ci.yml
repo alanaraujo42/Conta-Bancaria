@@ -26,6 +26,6 @@ jobs:
         run: pipenv install codecov
       - name: Run flake8
         run: pipenv run flake8
-      - name: Run Pytest e Coverage
-        run: pipenv run pytest --cov=.
+      - name: Upload coverage to Codecov
+        run: pipenv run codecov
       
