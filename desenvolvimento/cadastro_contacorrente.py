@@ -1,5 +1,5 @@
-from conta_corrente import ContaCorrente
-from banco_de_dados import banco_de_contas
+from desenvolvimento.conta_corrente import ContaCorrente
+from desenvolvimento.banco_de_dados import banco_de_contas
 
 
 def cadastro_nome():
@@ -44,10 +44,24 @@ def cadastro_senha():
             print('ERRO: Somente 4 dígitos e números')
 
 
+def verificar_banco_de_dados(cpf):
+    for conta in banco_de_contas:
+        verificar_cpf = conta.cpf
+        if cpf == verificar_cpf:
+            return 'ERRO'
+    return None
+
+
 def cadastro_conta_corrente():
+    print('\n' * 30)
+    print('----- Cadastro de Conta Corrente -----')
     # Input de dados
     nome = cadastro_nome()
     cpf = cadastro_cpf()
+    # Verificar se CPF já existe no Banco De Dados
+    resposta = verificar_banco_de_dados(cpf)
+    if resposta == 'ERRO':
+        return resposta
     senha = cadastro_senha()
     # Criação de conta corrente com os dados
     conta = ContaCorrente(nome, cpf, senha)

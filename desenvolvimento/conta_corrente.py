@@ -23,7 +23,7 @@ class ContaCorrente:
         se valor menor ou igual ao saldo da e retornar True, caso
         contrátrio, False.
         """
-        if ContaCorrente.verificar_saldo(valor):
+        if ContaCorrente.verificar_saldo(self, valor):
             self.saldo -= valor
             return True
         else:
