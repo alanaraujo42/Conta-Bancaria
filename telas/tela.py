@@ -8,8 +8,8 @@ class Tela:
         print('-' * 5, 'Seja bem vindo ao Banco', '-' * 5)
         print('''
 OPÇÕES:
-1- Login na sua conta 
-2- Cadastrar conta 
+1- Login na sua conta
+2- Cadastrar conta
 0- Sair do Banco
         ''')
         while True:
