@@ -1,5 +1,5 @@
-import pytest
 from desenvolvimento.conta_corrente import ContaCorrente
+import pytest
 
 
 @pytest.fixture
