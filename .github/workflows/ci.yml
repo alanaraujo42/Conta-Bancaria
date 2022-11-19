@@ -20,15 +20,13 @@ jobs:
         run: pip install pipenv
       - name: Install dependencias
         run: |
-          pipenv requirements > requirementes.txt
-          pip install -r requirementes.txt
-      - name: Install flake8
-        run: pipenv install flake8
+          pipenv sync -d
+          pipenv install flake8
       - name: Install Codecov
         run: pipenv install codecov
       - name: Run flake8
-        run: flake8
+        run: pipenv run flake8
       - name: Run Pytest e Coverage
-        run: pytest --cov=.
+        run: pipenv run pytest --cov=.
       - name: Upload coverage to Codecov
-        run: codecov
+        run: pipenv run codecov
