@@ -1,4 +1,4 @@
-from banco_de_dados import banco_de_contas
+from desenvolvimento.banco_de_dados import banco_de_contas
 
 
 def login_cpf():
@@ -6,6 +6,7 @@ def login_cpf():
         cpf = input('Digite o seu CPF (somente números): ')
         # Tratamento do dado
         cpf = cpf.strip()
+        cpf = cpf.replace(' ', '')
         # Verificação do dado
         if cpf.isnumeric() and len(cpf) == 11:
             return cpf
@@ -15,7 +16,7 @@ def login_cpf():
 
 def login_senha():
     while True:
-        senha = input('Digite uma senha com 4 dígitos: ')
+        senha = input('Digite sua senha com 4 dígitos: ')
         senha = senha.strip()
         if len(senha) == 4 and senha.isnumeric():
             return senha
@@ -28,7 +29,6 @@ def verificação_banco_de_dados(cpf, senha):
         dado_cpf = conta.cpf
         dado_senha = conta.senha
         if cpf == dado_cpf and senha == dado_senha:
-            print(conta)
             return conta
     return 'Você não possui cadastro!'
 

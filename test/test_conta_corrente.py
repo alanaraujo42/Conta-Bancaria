@@ -1,5 +1,5 @@
+from conta_corrente import ContaCorrente
 import pytest
-from desenvolvimento.conta_corrente import ContaCorrente
 
 
 @pytest.fixture
