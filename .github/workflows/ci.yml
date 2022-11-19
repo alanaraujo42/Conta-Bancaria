@@ -22,6 +22,7 @@ jobs:
         run: |
           pipenv requirements > requirementes.txt
           pip install -r requirementes.txt
+          pip install pytest-cov
       - name: Install flake8
         run: pipenv install flake8
       - name: Install Codecov
