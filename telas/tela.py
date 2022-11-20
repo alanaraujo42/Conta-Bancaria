@@ -1,4 +1,5 @@
 from desenvolvimento.login_contacorrente import login
+from desenvolvimento.banco_de_dados import banco_de_contas
 from time import sleep
 
 
@@ -37,12 +38,14 @@ OPÇÕES:
 ------------- OPÇÕES -------------
         1- Sacar Dinheiro
         2- Depositar dinheiro
+        3- Tranferir dinheiro
         0- Sair da conta
         ''')
         while True:
             resposta = input('Digite o número da sua opção: ')
             resposta = resposta.strip()
-            if resposta == '1' or resposta == '2' or resposta == '0':
+            if resposta == '1' or resposta == '2' or \
+                    resposta == '0' or resposta == '3':
                 return resposta
             else:
                 print('\nDigite somenete as opções disponíveis')
@@ -75,45 +78,123 @@ Gostaria de realizar cadastro?
         sleep(3)
         print('\n' * 30)
 
+    def _verifcar_valor(valor):
+        valor = valor.strip()
+        valor_reserva = valor
+        valor = valor.replace(',', '')
+        if valor.isnumeric():
+            valor = valor_reserva
+            valor = valor.replace(',', '.')
+            valor = float(valor)
+            return valor
+        else:
+            print('\nERRO: Digite somente números')
+
     def tela_saque_dinheiro(self, conta):
         print('\n' * 30)
         print('---- Saque de Dinheiro ----')
         while True:
-            valor = input('Digite o valor que você deseja sacar: R$')
-            valor = valor.strip()
-            valor_reserva = valor
-            valor = valor.replace(',', '')
-            if valor.isnumeric():
-                valor = valor_reserva
-                valor = valor.replace(',', '.')
-                valor = float(valor)
-                resposta = conta.sacar_dinheiro(valor)
-                if resposta:
-                    print(f'Saque de R${valor} realizado com sucesso')
-                    sleep(3)
+            while True:
+                valor = input('Digite o valor que você deseja sacar: R$')
+                resultado = Tela._verifcar_valor(valor)
+                if isinstance(resultado, float):
+                    valor = resultado
                     break
-                else:
-                    print('Saque NÃO realizado\nSaldo Insuficente')
-                    sleep(3)
-                    break
+            resposta = conta.sacar_dinheiro(valor)
+            if resposta:
+                print(f'Saque de R${valor} realizado com sucesso')
+                sleep(3)
+                break
             else:
-                print('\nERRO: Digite somente números')
+                print('Saque NÃO realizado\nSaldo Insuficente')
+                sleep(3)
+                break
 
     def tela_deposito_dinheiro(self, conta):
         print('\n' * 30)
         print('---- Deposito de Dinheiro ----')
         while True:
-            valor = input('Digite o valor que você deseja depositar: R$')
-            valor = valor.strip()
-            valor_reserva = valor
-            valor = valor.replace(',', '')
-            if valor.isnumeric():
-                valor = valor_reserva
-                valor = valor.replace(',', '.')
-                valor = float(valor)
-                conta.depositar_dinheiro(valor)
-                print(f'Deposito de R${valor} realizado com sucesso')
+            while True:
+                valor = input('Digite o valor que você deseja depositar: R$')
+                resultado = Tela._verifcar_valor(valor)
+                if isinstance(resultado, float):
+                    valor = resultado
+                    break
+            conta.depositar_dinheiro(valor)
+            print(f'Deposito de R${valor} realizado com sucesso')
+            sleep(3)
+            break
+
+    def _pegar_nome():
+        while True:
+            nome = input('Digite o nome completo da pessoa: ')
+            # Tratamento do nome
+            nome = nome.strip()
+            nome = nome.title()
+            # Verificação de nome
+            verificação = nome.split()
+            for i in verificação:
+                if i.isalpha():
+                    x = True
+                else:
+                    x = False
+                    break
+            if x:
+                return nome
+            else:
+                print('ERRO: Digite somente palavras!')
+
+    def _pegar_cpf():
+        while True:
+            cpf = input('Digite o CPF da pessoa (somente números): ')
+            # Tratamento do dado
+            cpf = cpf.strip()
+            # Verificação do dado
+            if cpf.isnumeric() and len(cpf) == 11:
+                return cpf
+            else:
+                print('ERRO: CPF Inválido!')
+
+    # Verificação para transferência
+    def _verificação_banco_de_dados(cpf, nome):
+        for conta in banco_de_contas:
+            dado_cpf = conta.cpf
+            dado_nome = conta.nome
+            if cpf == dado_cpf and nome == dado_nome:
+                return conta
+        return 'Você não possui cadastro!'
+
+    def tela_transferir_dinheiro(self, conta):
+        print('\n' * 30)
+        print('---- Transferencia de dinheiro ----')
+        print('-- Dados da conta Destino:')
+        while True:  # Verificação no Banco De Dados
+            nome = Tela._pegar_nome()
+            cpf = Tela._pegar_cpf()
+            resultado = Tela._verificação_banco_de_dados(cpf, nome)
+            if isinstance(resultado, str):
+                print('ERRO: Conta não existe!')
                 sleep(3)
                 break
-            else:
-                print('\nERRO: Digite somente números')
+            conta_destino = resultado
+            while True:  # Verificar valor digitado
+                valor = input('Digite o valor que você deseja transferir: R$')
+                resultado = Tela._verifcar_valor(valor)
+                if isinstance(resultado, float):
+                    valor = resultado
+                    break
+            x = conta.verificar_saldo(valor)  # Verificar saldo
+            if x:  # Realização da transferência
+                conta.transferir_dinheiro(conta_destino, valor)
+                print(f'''
+---- Transferência realizada com sucesso ----
+        Valor transferido: R${valor}
+        Pessoa: {conta_destino.nome}
+        CPF: {conta_destino.cpf}
+                ''')
+                sleep(4)
+                break
+            else:  # Saldo insuficênte na conta
+                print('---- Saldo insuficiênte ----')
+                sleep(3)
+                break

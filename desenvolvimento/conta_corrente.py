@@ -28,3 +28,7 @@ class ContaCorrente:
             return True
         else:
             return False
+
+    def transferir_dinheiro(self, conta_destino, valor):
+        self.saldo -= valor
+        conta_destino.saldo += valor
