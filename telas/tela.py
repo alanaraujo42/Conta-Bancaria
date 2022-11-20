@@ -39,13 +39,14 @@ OPÇÕES:
         1- Sacar Dinheiro
         2- Depositar dinheiro
         3- Tranferir dinheiro
+        4- Histórico de transações
         0- Sair da conta
         ''')
         while True:
             resposta = input('Digite o número da sua opção: ')
             resposta = resposta.strip()
             if resposta == '1' or resposta == '2' or \
-                    resposta == '0' or resposta == '3':
+                    resposta == '0' or resposta == '3' or resposta == '4':
                 return resposta
             else:
                 print('\nDigite somenete as opções disponíveis')
@@ -198,3 +199,11 @@ Gostaria de realizar cadastro?
                 print('---- Saldo insuficiênte ----')
                 sleep(3)
                 break
+
+    def tela_historico_transacoes(self, conta):
+        print('\n' * 30)
+        print('---- SEU HISTÓRICO DE TRANSAÇÕES ----')
+        for transferencia in conta.historico_transacoes:
+            print(transferencia)
+            sleep(0.5)
+        input('\nClique em qualquer tecla para voltar')

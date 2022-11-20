@@ -7,9 +7,11 @@ class ContaCorrente:
         self.agencia = '0001'
         self.numero_conta = '12345'
         self.saldo = 0
+        self.historico_transacoes = []
 
     def depositar_dinheiro(self, valor):
         self.saldo += valor
+        self.historico_transacoes.append(f'DEPOSITO: R${valor}')
 
     def verificar_saldo(self, valor):
         if valor <= self.saldo:
@@ -25,6 +27,7 @@ class ContaCorrente:
         """
         if ContaCorrente.verificar_saldo(self, valor):
             self.saldo -= valor
+            self.historico_transacoes.append(f'SAQUE: R${valor}')
             return True
         else:
             return False
@@ -32,3 +35,7 @@ class ContaCorrente:
     def transferir_dinheiro(self, conta_destino, valor):
         self.saldo -= valor
         conta_destino.saldo += valor
+        self.historico_transacoes.append(
+            f'TRANSFERÊNCIA - PARA: {conta_destino.nome} - VALOR: R${valor}')
+        conta_destino.historico_transacoes.append(
+            f'TRANSFERÊNCIA - DE: {self.nome} - VALOR: R${valor}')
