@@ -28,6 +28,8 @@ while True:
                     exibir.tela_deposito_dinheiro(conta)
                 elif resposta == '3':  # Se quiser transferir dinheiro
                     exibir.tela_transferir_dinheiro(conta)
+                elif resposta == '4':
+                    exibir.tela_historico_transacoes(conta)
                 elif resposta == '0':  # Se quiser sair da conta
                     print('\n' * 30)
                     break
