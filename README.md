@@ -4,7 +4,7 @@
 Projeto desenvolvido para fins de estudos, com o objetivo de consolidar os aprendizados de ferramentas de desenvolvimento, conceitos de programação e POO
 
 Ferramentas e conceitos como:
-- Gestão de dependências com Pyenv
+- Gestão de dependências com Pipenv
 - Ambiente Virtual com Venv 
 - CI com GitHub Actions
 - Feature Branch
